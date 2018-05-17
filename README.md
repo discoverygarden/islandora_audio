@@ -1,4 +1,4 @@
-# Audio Solution Pack [![Build Status](https://travis-ci.org/Islandora/islandora_solution_pack_audio.png?branch=7.x)](https://travis-ci.org/Islandora/islandora_solution_pack_audio)
+# Audio Solution Pack
 
 ## Introduction
 
@@ -8,7 +8,7 @@ Adds all required Fedora objects to allow users to ingest and retrieve audio fil
 
 This module requires the following modules/libraries:
 
-* [Islandora](https://github.com/islandora/islandora)
+* [Islandora](https://github.com/discoverygarden/islandora)
 * [Tuque](https://github.com/islandora/tuque)
 * [Lame](http://lame.sourceforge.net) (Debian/Ubuntu `sudo apt-get install lame`)
 
@@ -44,7 +44,7 @@ quality if, for example, you are ingesting a collection of MP3 files.
 Select the desired viewer for audio objects. Current viewer that can 
 be configured is:
 
-* [Islandora Video.js](https://github.com/Islandora/islandora_videojs)
+* [Islandora Video.js](https://github.com/discoverygarden/islandora_video)
 
 ![Configuration](https://cloud.githubusercontent.com/assets/1943338/18892256/42a78df0-84df-11e6-8e51-6b67c1a8c81a.png)
 
@@ -54,19 +54,27 @@ Further documentation for this module is available at [our wiki](https://wiki.du
 
 ## Troubleshooting/Issues
 
-Having problems or solved a problem? Check out the Islandora google groups for a solution.
+Having problems or solved one? Create an issue, check out the Islandora Google
+groups.
 
-* [Islandora Group](https://groups.google.com/forum/?hl=en&fromgroups#!forum/islandora)
-* [Islandora Dev Group](https://groups.google.com/forum/?hl=en&fromgroups#!forum/islandora-dev)
+* [Users](https://groups.google.com/forum/?hl=en&fromgroups#!forum/islandora)
+* [Devs](https://groups.google.com/forum/?hl=en&fromgroups#!forum/islandora-dev)
+
+or contact [discoverygarden](http://support.discoverygarden.ca).
 
 ## Maintainers/Sponsors
+
 Current maintainers:
 
-* [Jonathan Green](https://github.com/jonathangreen)
+* [discoverygarden](http://www.discoverygarden.ca)
 
 ## Development
 
-If you would like to contribute to this module, please check out [CONTRIBUTING.md](CONTRIBUTING.md). In addition, we have helpful [Documentation for Developers](https://github.com/Islandora/islandora/wiki#wiki-documentation-for-developers) info, as well as our [Developers](http://islandora.ca/developers) section on the [Islandora.ca](http://islandora.ca) site.
+If you would like to contribute to this module, please check out the helpful
+[Documentation](https://github.com/Islandora/islandora/wiki#wiki-documentation-for-developers),
+[Developers](http://islandora.ca/developers) section on Islandora.ca and create
+an issue, pull request and or contact
+[discoverygarden](http://support.discoverygarden.ca).
 
 ## License
 
