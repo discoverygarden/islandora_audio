@@ -43,11 +43,16 @@ function islandora_audio_create_mp3(AbstractObject $object, $force = FALSE) {
       $object['OBJ']->getContent($file_uri);
       $temp_file = islandora_temp_file_entry($file_uri, $object['OBJ']->mimetype);
       $output = array();
-      $file = drupal_realpath($file_uri);
+      $file = \Drupal::service("file_system")->realpath($file_uri);
       $out_uri = file_create_filename("$file_name.mp3", 'temporary://');
-      $outfile = drupal_realpath($out_uri);
-      $lame_url = variable_get('islandora_lame_url', '/usr/bin/lame');
-      $vbr_quality = variable_get('islandora_audio_vbr_quality', 5);
+      $outfile = \Drupal::service("file_system")->realpath($out_uri);
+      // @FIXME
+// // @FIXME
+// // This looks like another module's variable. You'll need to rewrite this call
+// // to ensure that it uses the correct configuration object.
+// $lame_url = variable_get('islandora_lame_url', '/usr/bin/lame');
+
+      $vbr_quality = \Drupal::config('islandora_audio.settings')->get('islandora_audio_vbr_quality');
       $command = "$lame_url -V$vbr_quality --vbr-new \"$file\" \"$outfile\"";
       $ret = FALSE;
       exec($command, $output, $ret);
@@ -125,7 +130,7 @@ function islandora_audio_add_datastream(AbstractObject $object, $datastream_id, 
     if ($ds->mimetype != $mime_detector->getMimetype($file_uri)) {
       $ds->mimetype = $mime_detector->getMimetype($file_uri);
     }
-    $ds->setContentFromFile(drupal_realpath($file_uri));
+    $ds->setContentFromFile(\Drupal::service("file_system")->realpath($file_uri));
     if ($ingest) {
       $object->ingestDatastream($ds);
     }

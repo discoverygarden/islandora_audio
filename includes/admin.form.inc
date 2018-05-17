@@ -19,7 +19,12 @@
 function islandora_audio_admin(array $form, array &$form_state) {
   module_load_include('inc', 'islandora', 'includes/utilities');
   $get_default_value = function($name, $default) use(&$form_state) {
-    return isset($form_state['values'][$name]) ? $form_state['values'][$name] : variable_get($name, $default);
+    // @FIXME
+// // @FIXME
+// // The correct configuration object could not be determined. You'll need to
+// // rewrite this call manually.
+// return isset($form_state['values'][$name]) ? $form_state['values'][$name] : variable_get($name, $default);
+
   };
   $lame = $get_default_value('islandora_lame_url', '/usr/bin/lame');
   $form['derivatives'] = array(
@@ -34,7 +39,7 @@ function islandora_audio_admin(array $form, array &$form_state) {
       '#title' => t('Defer audio derivative generation during ingest'),
       '#description' => t('Prevent audio derivatives from running during ingest,
             useful if derivatives are to be created by an external service.'),
-      '#default_value' => variable_get('islandora_audio_defer_derivatives_on_ingest', FALSE),
+      '#default_value' => \Drupal::config('islandora_audio.settings')->get('islandora_audio_defer_derivatives_on_ingest'),
     ),
     'islandora_lame_url' => array(
       '#type' => 'textfield',
@@ -60,7 +65,7 @@ function islandora_audio_admin(array $form, array &$form_state) {
       '#title' => t('MP3 derivative quality'),
       '#description' => t('Variable Bit Rate quality setting (0=highest quality, 9.999=lowest). Default = 5.'),
       '#size' => 5,
-      '#default_value' => variable_get('islandora_audio_vbr_quality', 5),
+      '#default_value' => \Drupal::config('islandora_audio.settings')->get('islandora_audio_vbr_quality'),
       '#element_validate' => array('element_validate_number', 'islandora_audio_vbr_quality_validate'),
 
     ),

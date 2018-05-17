@@ -20,7 +20,12 @@ function islandora_audio_audio_upload_form(array $form, array &$form_state) {
   $upload_size = min((int) ini_get('post_max_size'), (int) ini_get('upload_max_filesize'));
   $audio_extensions = array('wav mp3');
   $thumbnail_extensions = array('gif jpg png jpeg');
-  $upload_required = variable_get('islandora_require_obj_upload', TRUE);
+  // @FIXME
+// // @FIXME
+// // This looks like another module's variable. You'll need to rewrite this call
+// // to ensure that it uses the correct configuration object.
+// $upload_required = variable_get('islandora_require_obj_upload', TRUE);
+
 
   return array(
     'audio_file' => array(
@@ -103,7 +108,7 @@ function islandora_audio_audio_upload_form_submit(array $form, array &$form_stat
       $obj = $object['OBJ'];
     }
     $audio_file = file_load($form_state['values']['audio_file']);
-    $obj->setContentFromFile(drupal_realpath($audio_file->uri), FALSE);
+    $obj->setContentFromFile(\Drupal::service("file_system")->realpath($audio_file->uri), FALSE);
     if ($obj->label != $audio_file->filename) {
       $obj->label = $audio_file->filename;
     }
@@ -124,7 +129,7 @@ function islandora_audio_audio_upload_form_submit(array $form, array &$form_stat
     else {
       $tn = $object['TN'];
     }
-    $tn->setContentFromFile(drupal_realpath($thumbnail_file->uri), FALSE);
+    $tn->setContentFromFile(\Drupal::service("file_system")->realpath($thumbnail_file->uri), FALSE);
     if ($tn->label != $thumbnail_file->filename) {
       $tn->label = $thumbnail_file->filename;
     }
