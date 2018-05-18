@@ -9,7 +9,7 @@
  * Implements hook_requirements().
  */
 function islandora_audio_requirements($phase) {
-  $t = get_t();
+  $t = 't';
   // @FIXME
 // // @FIXME
 // // This looks like another module's variable. You'll need to rewrite this call
