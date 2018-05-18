@@ -1,0 +1,2 @@
+islandora_lame_url: '/usr/bin/lame'
+islandora_audio_defer_derivatives_on_ingest: false

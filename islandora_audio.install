@@ -14,7 +14,7 @@ function islandora_audio_requirements($phase) {
 // // @FIXME
 // // This looks like another module's variable. You'll need to rewrite this call
 // // to ensure that it uses the correct configuration object.
-// $lame = variable_get('islandora_lame_url', '/usr/bin/lame');
+  $lame = \Drupal::config('islandora_audio.settings')->get('islandora_lame_url');
 
   $value = $t('Avaliable');
   $description = NULL;
@@ -51,12 +51,4 @@ function islandora_audio_install() {
 function islandora_audio_uninstall() {
   module_load_include('inc', 'islandora', 'includes/solution_packs');
   islandora_install_solution_pack('islandora_audio', 'uninstall');
-  $variables = array(
-    'islandora_audio_defer_derivatives_on_ingest',
-    'islandora_audio_viewers',
-    'islandora_lame_url',
-    'islandora_audio_obj_fallback',
-    'islandora_audio_vbr_quality',
-  );
-  array_walk($variables, 'variable_del');
 }
