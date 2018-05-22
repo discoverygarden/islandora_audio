@@ -1,0 +1,5 @@
+islandora_audio.admin:
+  route_name: islandora_audio.admin
+  parent: islandora.solution_packs_admin
+  title: 'Audio Solution Pack'
+  description: 'Configure audio derivatives and select player.'

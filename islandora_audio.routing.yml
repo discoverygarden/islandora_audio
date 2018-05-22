@@ -1,0 +1,7 @@
+islandora_audio.admin:
+  path: '/admin/config/islandora/solution_pack_config/audio'
+  defaults:
+    _title: 'Audio Solution Pack'
+    _form: '\Drupal\islandora_audio\Form\Admin'
+  requirements:
+    _permission: 'administer site configuration'
