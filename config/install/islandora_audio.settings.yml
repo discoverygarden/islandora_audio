@@ -1,2 +1,4 @@
 islandora_lame_url: '/usr/bin/lame'
 islandora_audio_defer_derivatives_on_ingest: false
+islandora_audio_vbr_quality: 5
+islandora_audio_obj_fallback: true

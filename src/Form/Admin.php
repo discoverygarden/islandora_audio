@@ -44,7 +44,8 @@ class Admin extends ConfigFormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     module_load_include('inc', 'islandora', 'includes/utilities');
-    $lame = $this->config('islandora_audio.settings')->get('islandora_lame_url');
+    $config = $this->config('islandora_audio.settings');
+    $lame = $config->get('islandora_lame_url');
     $form['derivatives'] = [
       '#type' => 'fieldset',
       '#title' => $this->t('Derivatives'),
@@ -57,7 +58,7 @@ class Admin extends ConfigFormBase {
         '#title' => $this->t('Defer audio derivative generation during ingest'),
         '#description' => $this->t('Prevent audio derivatives from running during ingest,
               useful if derivatives are to be created by an external service.'),
-        '#default_value' => $this->config('islandora_audio.settings')->get('islandora_audio_defer_derivatives_on_ingest'),
+        '#default_value' => $config->get('islandora_audio_defer_derivatives_on_ingest'),
       ],
       'islandora_lame_url' => [
         '#type' => 'textfield',
@@ -82,14 +83,14 @@ class Admin extends ConfigFormBase {
         '#title' => $this->t('MP3 derivative quality'),
         '#description' => $this->t('Variable Bit Rate quality setting (0=highest quality, 9.999=lowest). Default = 5.'),
         '#size' => 5,
-        '#default_value' => $this->config('islandora_audio.settings')->get('islandora_audio_vbr_quality'),
+        '#default_value' => $config->get('islandora_audio_vbr_quality'),
         '#element_validate' => ['element_validate_number', 'islandora_audio_vbr_quality_validate'],
       ],
       'islandora_audio_obj_fallback' => [
         '#type' => 'checkbox',
         '#title' => $this->t('Use original file as fallback'),
         '#description' => $this->t('Attempt to play the OBJ datastream in the player if the PROXY_MP3 derivative is not present.'),
-        '#default_value' => $this->config('islandora_audio.settings')->get('islandora_audio_obj_fallback'),
+        '#default_value' => $config->get('islandora_audio_obj_fallback'),
       ],
     ];
 
