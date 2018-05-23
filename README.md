@@ -44,7 +44,7 @@ quality if, for example, you are ingesting a collection of MP3 files.
 Select the desired viewer for audio objects. Current viewer that can 
 be configured is:
 
-* [Islandora Video.js](https://github.com/discoverygarden/islandora_video)
+* [Islandora Video.js](https://github.com/discoverygarden/islandora_videojs)
 
 ![Configuration](https://cloud.githubusercontent.com/assets/1943338/18892256/42a78df0-84df-11e6-8e51-6b67c1a8c81a.png)
 
