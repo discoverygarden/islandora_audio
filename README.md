@@ -2,7 +2,8 @@
 
 ## Introduction
 
-Adds all required Fedora objects to allow users to ingest and retrieve audio files through the Islandora interface
+Adds all required Fedora objects to allow users to ingest and retrieve audio
+files through the Islandora interface.
 
 ## Requirements
 
@@ -10,11 +11,13 @@ This module requires the following modules/libraries:
 
 * [Islandora](https://github.com/discoverygarden/islandora)
 * [Tuque](https://github.com/islandora/tuque)
-* [Lame](http://lame.sourceforge.net) (Debian/Ubuntu `sudo apt-get install lame`)
+* [Lame](http://lame.sourceforge.net)(Debian/Ubuntu `sudo apt-get install lame`)
 
 ## Installation
 
-Install as usual, see [this](https://drupal.org/documentation/install/modules-themes/modules-7) for further information.
+Install as usual, see
+[this](https://drupal.org/documentation/install/modules-themes/modules-7) for
+further information.
 
 ## Configuration
 
@@ -50,7 +53,8 @@ be configured is:
 
 ## Documentation
 
-Further documentation for this module is available at [our wiki](https://wiki.duraspace.org/display/ISLANDORA/Audio+Solution+Pack).
+Further documentation for this module is available at
+[our wiki](https://wiki.duraspace.org/display/ISLANDORA/Audio+Solution+Pack).
 
 ## Troubleshooting/Issues
 

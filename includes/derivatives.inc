@@ -10,7 +10,6 @@
  *
  * @param AbstractObject $object
  *   An AbstractObject representing an object in Fedora.
- *
  * @param bool $force
  *   Whether the derivative generation is being forced.
  *
@@ -22,17 +21,17 @@
 function islandora_audio_create_mp3(AbstractObject $object, $force = FALSE) {
   if (!isset($object['PROXY_MP3']) || (isset($object['PROXY_MP3']) && $force === TRUE)) {
     if (!isset($object["OBJ"])) {
-      return array(
+      return [
         'success' => FALSE,
-        'messages' => array(
-          array(
+        'messages' => [
+          [
             'message' => t('No OBJ datastream present for object @pid - PROXY_MP3 creation was skipped.'),
-            'message_sub' => array('@pid' => $object->id),
+            'message_sub' => ['@pid' => $object->id],
             'type' => 'watchdog',
             'severity' => WATCHDOG_ERROR,
-          ),
-        ),
-      );
+          ],
+        ],
+      ];
     }
     else {
       module_load_include('inc', 'islandora', 'includes/utilities');
@@ -42,16 +41,11 @@ function islandora_audio_create_mp3(AbstractObject $object, $force = FALSE) {
       $file_uri = file_create_filename($file_name, 'temporary://');
       $object['OBJ']->getContent($file_uri);
       $temp_file = islandora_temp_file_entry($file_uri, $object['OBJ']->mimetype);
-      $output = array();
+      $output = [];
       $file = \Drupal::service("file_system")->realpath($file_uri);
       $out_uri = file_create_filename("$file_name.mp3", 'temporary://');
       $outfile = \Drupal::service("file_system")->realpath($out_uri);
-      // @FIXME
-// // @FIXME
-// // This looks like another module's variable. You'll need to rewrite this call
-// // to ensure that it uses the correct configuration object.
-// $lame_url = variable_get('islandora_lame_url', '/usr/bin/lame');
-
+      $lame_url = \Drupal::config('islandora_audio.settings')->get('islandora_lame_url');
       $vbr_quality = \Drupal::config('islandora_audio.settings')->get('islandora_audio_vbr_quality');
       $command = "$lame_url -V$vbr_quality --vbr-new \"$file\" \"$outfile\"";
       $ret = FALSE;
@@ -66,17 +60,17 @@ function islandora_audio_create_mp3(AbstractObject $object, $force = FALSE) {
       }
       // Failure.
       else {
-        return array(
+        return [
           'success' => FALSE,
-          'messages' => array(
-            array(
+          'messages' => [
+            [
               'message' => t('LAME encoding failed for object @pid - PROXY_MP3 creation was skipped.'),
-              'message_sub' => array('@pid' => $object->id),
+              'message_sub' => ['@pid' => $object->id],
               'type' => 'watchdog',
               'severity' => WATCHDOG_ERROR,
-            ),
-          ),
-        );
+            ],
+          ],
+        ];
       }
     }
   }
@@ -87,7 +81,6 @@ function islandora_audio_create_mp3(AbstractObject $object, $force = FALSE) {
  *
  * @param AbstractObject $object
  *   An AbstractObject representing an object in Fedora.
- *
  * @param bool $force
  *   Whether the derivative generation is being forced.
  *
@@ -134,36 +127,36 @@ function islandora_audio_add_datastream(AbstractObject $object, $datastream_id, 
     if ($ingest) {
       $object->ingestDatastream($ds);
     }
-    return array(
+    return [
       'success' => TRUE,
-      'messages' => array(
-        array(
+      'messages' => [
+        [
           'message' => t('Created @dsid derivative for OBJ (@pid).'),
-          'message_sub' => array(
+          'message_sub' => [
             '@dsid' => $datastream_id,
             '@pid' => $object->id,
-          ),
+          ],
           'type' => 'dsm',
-        ),
-      ),
-    );
+        ],
+      ],
+    ];
   }
   catch (exception $e) {
-    return array(
+    return [
       'success' => FALSE,
-      'messages' => array(
-        array(
+      'messages' => [
+        [
           'message' => t('Audio solution pack failed to add @dsid datastream for @pid. Error message: @message<br/>Stack: @stack'),
-          'message_sub' => array(
+          'message_sub' => [
             '@dsid' => $datastream_id,
             '@pid' => $object->id,
             '@message' => $e->getmessage(),
             '@stack' => $e->getTraceAsString(),
-          ),
+          ],
           'type' => 'watchdog',
           'severity' => WATCHDOG_ERROR,
-        ),
-      ),
-    );
+        ],
+      ],
+    ];
   }
 }

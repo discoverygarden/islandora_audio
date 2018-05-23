@@ -10,10 +10,6 @@
  */
 function islandora_audio_requirements($phase) {
   $t = 't';
-  // @FIXME
-// // @FIXME
-// // This looks like another module's variable. You'll need to rewrite this call
-// // to ensure that it uses the correct configuration object.
   $lame = \Drupal::config('islandora_audio.settings')->get('islandora_lame_url');
 
   $value = $t('Avaliable');
@@ -27,14 +23,14 @@ function islandora_audio_requirements($phase) {
       $severity = REQUIREMENT_INFO;
     }
   }
-  return array(
-    array(
+  return [
+    [
       'title' => $t('LAME'),
       'value' => $value,
       'description' => $description,
       'severity' => $severity,
-    ),
-  );
+    ],
+  ];
 }
 
 /**

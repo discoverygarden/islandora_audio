@@ -65,7 +65,7 @@ class Admin extends ConfigFormBase {
         '#title' => $this->t("Path to LAME"),
         '#description' => $this->t('@LAME is required to create derivatives files.<br/>',
                         [
-                          '@LAME' => Link::fromTextAndUrl(t('LAME'), Url::fromUri('http://lame.sourceforge.net/'))->toString(),
+                          '@LAME' => Link::fromTextAndUrl($this->t('LAME'), Url::fromUri('http://lame.sourceforge.net/'))->toString(),
                         ]) . islandora_executable_available_message($lame),
         '#default_value' => $lame,
         '#size' => 20,
@@ -103,4 +103,5 @@ class Admin extends ConfigFormBase {
     $form += islandora_viewers_form('islandora_audio_viewers', 'audio/mpeg');
     return $form;
   }
+
 }
