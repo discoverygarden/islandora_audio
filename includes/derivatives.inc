@@ -5,6 +5,12 @@
  * This file contains functions used to generate derivatives of audio objects.
  */
 
+use Drupal\file\FileInterface;
+use Drupal\file\Entity\File;
+
+use Drupal\islandora\MimeDetect;
+use Drupal\Core\Logger\RfcLogLevel;
+
 /**
  * Creates the PROXY_MP3 derivative from the given audio file.
  *
@@ -20,15 +26,15 @@
  */
 function islandora_audio_create_mp3(AbstractObject $object, $force = FALSE) {
   if (!isset($object['PROXY_MP3']) || (isset($object['PROXY_MP3']) && $force === TRUE)) {
-    if (!isset($object["OBJ"])) {
+    if (!isset($object['OBJ'])) {
       return [
         'success' => FALSE,
         'messages' => [
           [
             'message' => t('No OBJ datastream present for object @pid - PROXY_MP3 creation was skipped.'),
             'message_sub' => ['@pid' => $object->id],
-            'type' => 'watchdog',
-            'severity' => WATCHDOG_ERROR,
+            'type' => 'log',
+            'severity' => RfcLogLevel::ERROR,
           ],
         ],
       ];
@@ -66,8 +72,8 @@ function islandora_audio_create_mp3(AbstractObject $object, $force = FALSE) {
             [
               'message' => t('LAME encoding failed for object @pid - PROXY_MP3 creation was skipped.'),
               'message_sub' => ['@pid' => $object->id],
-              'type' => 'watchdog',
-              'severity' => WATCHDOG_ERROR,
+              'type' => 'log',
+              'severity' => RfcLogLevel::ERROR,
             ],
           ],
         ];
@@ -112,7 +118,6 @@ function islandora_audio_add_datastream(AbstractObject $object, $datastream_id, 
   try {
     $ingest = !isset($object[$datastream_id]);
     $mime_detector = new MimeDetect();
-
     if ($ingest) {
       $ds = $object->constructDatastream($datastream_id, "M");
       $ds->label = $datastream_id;
@@ -120,8 +125,8 @@ function islandora_audio_add_datastream(AbstractObject $object, $datastream_id, 
     else {
       $ds = $object[$datastream_id];
     }
-    if ($ds->mimetype != $mime_detector->getMimetype($file_uri)) {
-      $ds->mimetype = $mime_detector->getMimetype($file_uri);
+    if ($ds->mimetype != $mime_detector->getMimeType($file_uri)) {
+      $ds->mimetype = $mime_detector->getMimeType($file_uri);
     }
     $ds->setContentFromFile(\Drupal::service("file_system")->realpath($file_uri));
     if ($ingest) {
@@ -153,8 +158,8 @@ function islandora_audio_add_datastream(AbstractObject $object, $datastream_id, 
             '@message' => $e->getmessage(),
             '@stack' => $e->getTraceAsString(),
           ],
-          'type' => 'watchdog',
-          'severity' => WATCHDOG_ERROR,
+          'type' => 'log',
+          'severity' => RfcLogLevel::ERROR,
         ],
       ],
     ];

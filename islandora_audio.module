@@ -71,8 +71,10 @@ function islandora_audio_islandora_required_objects(IslandoraTuque $connection) 
  * Implements hook_CMODEL_PID_islandora_view_object().
  */
 function islandora_audio_islandora_sp_audiocmodel_islandora_view_object($object, $page_number, $page_size) {
-  $output = theme('islandora_audio', ['islandora_object' => $object]);
-  return ['' => $output];
+  return [
+    '#theme' => 'islandora_audio',
+    '#islandora_object' => $object,
+  ];
 }
 
 /**
@@ -203,9 +205,7 @@ function islandora_audio_islandora_sp_audiocmodel_islandora_ingest_steps() {
     'islandora_audio_upload' => [
       'weight' => 10,
       'type' => 'form',
-      'form_id' => 'islandora_audio_audio_upload_form',
-      'module' => 'islandora_audio',
-      'file' => 'includes/audio_upload.form.inc',
+      'form_class' => 'Drupal\islandora_audio\Form\AudioUpload',
     ],
   ];
 }
