@@ -5,9 +5,6 @@
  * This file contains functions used to generate derivatives of audio objects.
  */
 
-use Drupal\file\FileInterface;
-use Drupal\file\Entity\File;
-
 use Drupal\islandora\MimeDetect;
 use Drupal\Core\Logger\RfcLogLevel;
 
@@ -56,12 +53,12 @@ function islandora_audio_create_mp3(AbstractObject $object, $force = FALSE) {
       $command = "$lame_url -V$vbr_quality --vbr-new \"$file\" \"$outfile\"";
       $ret = FALSE;
       exec($command, $output, $ret);
-      file_delete($temp_file);
+      $temp_file->delete();
       $temp_file = islandora_temp_file_entry($out_uri, 'audio/mpeg');
       // Successfully crafted the derivative.
       if ($ret == '0') {
         $to_return = islandora_audio_add_datastream($object, 'PROXY_MP3', $outfile);
-        file_delete($temp_file);
+        $temp_file->delete();
         return $to_return;
       }
       // Failure.

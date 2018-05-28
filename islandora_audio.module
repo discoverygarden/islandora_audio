@@ -5,6 +5,11 @@
  * Handles the creation/display of islandora:sp-audioCModel objects.
  */
 
+use Drupal\Core\Url;
+use Drupal\Core\Link;
+
+use Drupal\islandora\DublinCore;
+
 /**
  * Implements hook_menu().
  */
@@ -122,8 +127,6 @@ function islandora_audio_theme($existing, $type, $theme, $path) {
  * Implements template_preprocess_HOOK().
  */
 function template_preprocess_islandora_audio(array &$variables) {
-  drupal_add_js('misc/form.js');
-  drupal_add_js('misc/collapse.js');
   $islandora_object = $variables['islandora_object'];
   module_load_include('inc', 'islandora', 'includes/datastream');
   module_load_include('inc', 'islandora', 'includes/utilities');
@@ -154,12 +157,13 @@ function template_preprocess_islandora_audio(array &$variables) {
   ];
   // Thumbnail.
   if (isset($islandora_object['TN']) && islandora_datastream_access(ISLANDORA_VIEW_OBJECTS, $islandora_object['TN'])) {
-    $tn_url = url("islandora/object/{$islandora_object->id}/datastream/TN/view");
-    $params = [
-      'title' => $islandora_object->label,
-      'path' => $tn_url,
+    $tn_url = Url::fromRoute('islandora.view_datastream_view', ['object' => $islandora_object->id, 'datastream' => 'TN'])->toString();
+    $img = [
+      '#theme' => 'image',
+      '#title' => $islandora_object->label,
+      '#uri' => $tn_url,
     ];
-    $variables['islandora_thumbnail_img'] = theme('image', $params);
+    $variables['islandora_thumbnail_img'] = \Drupal::service('renderer')->render($img);
 
     $audio_params += [
       'tn' => $tn_url,
@@ -175,10 +179,9 @@ function template_preprocess_islandora_audio(array &$variables) {
     islandora_audio_datastream_valid_for_playback($islandora_object['OBJ']) ? 'OBJ' : 'PROXY_MP3';
 
   if (islandora_datastream_access(ISLANDORA_VIEW_OBJECTS, $islandora_object[$dsid])) {
-    $audio_url = url("islandora/object/{$islandora_object->id}/datastream/$dsid", ['absolute' => TRUE]);
-
+    $audio_url = Url::fromRoute('islandora.view_datastream_view' , ['object' => $islandora_object->id, 'datastream' => $dsid], ['absolute' => TRUE]);
     $audio_params += [
-      "url" => $audio_url,
+      "url" => $audio_url->toString(),
       "mime" => 'audio/mpeg',
     ];
 
@@ -189,10 +192,10 @@ function template_preprocess_islandora_audio(array &$variables) {
       $variables['islandora_content'] = $viewer;
     }
     elseif (isset($variables['islandora_thumbnail_img'])) {
-      $variables['islandora_content'] = l($variables['islandora_thumbnail_img'], $audio_url, ['html' => TRUE]);
+      $variables['islandora_content'] = Link::fromTextAndUrl($variables['islandora_thumbnail_img'], $audio_url);
     }
     else {
-      $variables['islandora_content'] = l($islandora_object->label, $audio_url);
+      $variables['islandora_content'] = Link::fromTextAndUrl($islandora_object->label, $audio_url);
     }
   }
 }
