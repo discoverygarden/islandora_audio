@@ -116,7 +116,7 @@ function islandora_audio_xml_form_builder_form_associations() {
 function islandora_audio_theme($existing, $type, $theme, $path) {
   return [
     'islandora_audio' => [
-      'template' => 'theme/islandora-audio',
+      'template' => 'islandora_audio',
       'pattern' => 'islandora_audio__',
       'variables' => ['islandora_object' => NULL],
     ],
