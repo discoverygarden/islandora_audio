@@ -44,6 +44,7 @@ class Admin extends ConfigFormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     module_load_include('inc', 'islandora', 'includes/utilities');
+    $form_state->loadInclude('islandora_audio', 'inc', 'includes/admin.form');
     $config = $this->config('islandora_audio.settings');
     $lame = $config->get('islandora_lame_url');
     $form['derivatives'] = [
@@ -94,13 +95,12 @@ class Admin extends ConfigFormBase {
       ],
     ];
 
+    module_load_include('inc', 'islandora', 'includes/solution_packs');
+    $form += islandora_viewers_form('islandora_audio_viewers', 'audio/mpeg');
     $form['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Submit'),
     ];
-
-    module_load_include('inc', 'islandora', 'includes/solution_packs');
-    $form += islandora_viewers_form('islandora_audio_viewers', 'audio/mpeg');
     return $form;
   }
 
