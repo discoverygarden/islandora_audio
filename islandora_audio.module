@@ -179,7 +179,7 @@ function template_preprocess_islandora_audio(array &$variables) {
     islandora_audio_datastream_valid_for_playback($islandora_object['OBJ']) ? 'OBJ' : 'PROXY_MP3';
 
   if (islandora_datastream_access(ISLANDORA_VIEW_OBJECTS, $islandora_object[$dsid])) {
-    $audio_url = Url::fromRoute('islandora.view_datastream_view' , ['object' => $islandora_object->id, 'datastream' => $dsid], ['absolute' => TRUE]);
+    $audio_url = Url::fromRoute('islandora.view_datastream_view', ['object' => $islandora_object->id, 'datastream' => $dsid], ['absolute' => TRUE]);
     $audio_params += [
       "url" => $audio_url->toString(),
       "mime" => 'audio/mpeg',
