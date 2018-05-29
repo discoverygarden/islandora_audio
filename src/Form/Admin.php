@@ -26,8 +26,11 @@ class Admin extends ConfigFormBase {
     $config = $this->config('islandora_audio.settings');
 
     $config->set('islandora_lame_url', $form_state->getValue('islandora_lame_url'));
-
     $config->set('islandora_audio_defer_derivatives_on_ingest', $form_state->getValue('islandora_audio_defer_derivatives_on_ingest'));
+    $config->set('islandora_audio_vbr_quality', $form_state->getValue('islandora_audio_vbr_quality'));
+    $config->set('islandora_audio_obj_fallback', $form_state->getValue('islandora_audio_obj_fallback'));
+
+    islandora_set_viewer_info('islandora_audio_viewers', $form_state->getValue('islandora_audio_viewers'));
 
     $config->save();
   }
@@ -80,12 +83,14 @@ class Admin extends ConfigFormBase {
         ],
       ],
       'islandora_audio_vbr_quality' => [
-        '#type' => 'textfield',
+        '#type' => 'number',
+        '#min' => 0,
+        '#max' => 9.999,
+        '#step' => 0.001,
         '#title' => $this->t('MP3 derivative quality'),
         '#description' => $this->t('Variable Bit Rate quality setting (0=highest quality, 9.999=lowest). Default = 5.'),
         '#size' => 5,
         '#default_value' => $config->get('islandora_audio_vbr_quality'),
-        '#element_validate' => ['element_validate_number', 'islandora_audio_vbr_quality_validate'],
       ],
       'islandora_audio_obj_fallback' => [
         '#type' => 'checkbox',
