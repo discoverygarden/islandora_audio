@@ -11,23 +11,6 @@ use Drupal\Core\Link;
 use Drupal\islandora\DublinCore;
 
 /**
- * Implements hook_menu().
- */
-function islandora_audio_menu() {
-  return [
-    'admin/islandora/solution_pack_config/audio' => [
-      'title' => 'Audio Solution Pack',
-      'description' => 'Configure audio derivatives and select player.',
-      'page callback' => 'drupal_get_form',
-      'access arguments' => ['administer site configuration'],
-      'page arguments' => ['islandora_audio_admin'],
-      'file' => 'includes/admin.form.inc',
-      'type' => MENU_NORMAL_ITEM,
-    ],
-  ];
-}
-
-/**
  * Implements hook_islandora_required_objects().
  */
 function islandora_audio_islandora_required_objects(IslandoraTuque $connection) {
