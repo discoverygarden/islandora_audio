@@ -1,0 +1,12 @@
+islandora_audio.settings:
+  type: mapping
+  label: Settings
+  mapping:
+    islandora_lame_url:
+      type: string
+    islandora_audio_defer_derivatives_on_ingest:
+      type: boolean
+    islandora_audio_vbr_quality:
+      type: float
+    islandora_audio_obj_fallback:
+      type: boolean
