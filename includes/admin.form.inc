@@ -12,7 +12,7 @@ use Drupal\Core\Form\FormStateInterface;
  *
  * @param array $form
  *   The Drupal form definition.
- * @param FormStateInterface $form_state
+ * @param Drupal\Core\Form\FormStateInterface $form_state
  *   The Drupal form state.
  *
  * @return array

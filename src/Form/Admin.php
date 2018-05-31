@@ -50,7 +50,7 @@ class Admin extends ConfigFormBase {
     $form_state->loadInclude('islandora_audio', 'inc', 'includes/admin.form');
     $config = $this->config('islandora_audio.settings');
 
-    //Check the form state first for the lame url so AJAX can work.
+    // Check the form state first for the lame url so AJAX can work.
     $lame_url = $form_state->getValue('islandora_lame_url');
     $lame = (NULL !== $lame_url) ? $lame_url : $config->get('islandora_lame_url');
 
