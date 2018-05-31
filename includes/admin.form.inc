@@ -5,6 +5,8 @@
  * Admin helpers for Islandora Audio.
  */
 
+use Drupal\Core\Form\FormStateInterface;
+
 /**
  * Ajax callback for the Lame textfield.
  *
@@ -17,5 +19,5 @@
  *   The element to render as part the ajax callback.
  */
 function islandora_audio_admin_form_lame_ajax_callback(array $form, FormStateInterface $form_state) {
-  return $form['islandora_lame_url'];
+  return $form['derivatives']['islandora_lame_url'];
 }
