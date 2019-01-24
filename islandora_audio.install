@@ -13,7 +13,7 @@ function islandora_audio_requirements($phase) {
   $lame = \Drupal::config('islandora_audio.settings')->get('islandora_lame_url');
 
   $value = $t('Avaliable');
-  $description = NULL;
+  $description = t('Found');
   $severity = REQUIREMENT_OK;
   if (!is_executable($lame)) {
     $value = $t('Not Found');
