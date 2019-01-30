@@ -24,7 +24,7 @@ function islandora_audio_requirements($phase) {
     }
   }
   return [
-    [
+    'islandora_audio_lame' => [
       'title' => $t('LAME'),
       'value' => $value,
       'description' => $description,
