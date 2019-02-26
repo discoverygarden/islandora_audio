@@ -1,5 +1,5 @@
 islandora_audio.settings:
-  type: mapping
+  type: config_object
   label: Settings
   mapping:
     islandora_lame_url:
