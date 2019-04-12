@@ -84,6 +84,7 @@ function islandora_audio_xml_form_builder_form_associations() {
   return [
     'islandora_audio_mods_form' => [
       'content_model' => 'islandora:sp-audioCModel',
+      'self_transform' => 'islandora_cleanup_mods_extended.xsl',
       'form_name' => 'Audio MODS form',
       'dsid' => 'MODS',
       'title_field' => ['titleInfo', 'title'],
