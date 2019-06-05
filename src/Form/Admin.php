@@ -71,7 +71,7 @@ class Admin extends ConfigFormBase {
       'islandora_lame_url' => [
         '#type' => 'textfield',
         '#title' => $this->t("Path to LAME"),
-        '#description' => $this->t('@LAME is required to create derivative files.<br/>',
+        '#description' => $this->t('@LAME is required to create MP3 derivative files.<br/>',
                         [
                           '@LAME' => Link::fromTextAndUrl($this->t('LAME'), Url::fromUri('http://lame.sourceforge.net/'))->toString(),
                         ]) . islandora_executable_available_message($lame),
