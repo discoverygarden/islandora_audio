@@ -55,12 +55,10 @@ class AudioUpload extends FormBase {
         '#title' => $this->t('Audio File'),
         '#type' => 'managed_file',
         '#required' => $upload_required,
-        '#description' => $this->t('Select a file to upload.<br/>Files must be
-          less than <strong>@size MB.</strong><br/>Allowed file types: <strong>
-          @ext.</strong>', [
-            '@size' => $upload_size,
-            '@ext' => $audio_extensions[0],
-          ]),
+        '#description' => $this->t('Select a file to upload.<br/>Files must be less than <strong>@size MB.</strong><br/>Allowed file types: <strong>@ext.</strong>', [
+          '@size' => $upload_size,
+          '@ext' => $audio_extensions[0],
+        ]),
         '#default_value' => $form_state->getValue('audio_file'),
         '#upload_location' => 'temporary://',
         '#upload_validators' => [
@@ -77,12 +75,13 @@ class AudioUpload extends FormBase {
         'thumbnail_file' => [
           '#title' => $this->t('Thumbnail File'),
           '#type' => 'managed_file',
-          '#description' => $this->t('Select a file to upload.
-            <br/>Files must be less than <strong>@size MB.</strong>
-            <br/>Allowed file types: <strong>@ext.</strong>', [
-              '@size' => $upload_size,
-              '@ext' => $thumbnail_extensions[0],
-            ]),
+          '#description' => $this->t('Select a file to upload.') .
+          $this->t('<br/>Files must be less than <strong>@size MB.</strong>', [
+            '@size' => $upload_size,
+          ]) .
+          $this->t('<br/>Allowed file types: <strong>@ext.</strong>', [
+            '@ext' => $thumbnail_extensions[0],
+          ]),
           '#default_value' => $form_state->getValue('thumbnail_file'),
           '#upload_location' => 'temporary://',
           '#upload_validators' => [
