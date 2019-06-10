@@ -266,6 +266,5 @@ function islandora_audio_help($route) {
 
       return $output;
 
-    // Other cases can be added for various admin pages.
   }
 }
