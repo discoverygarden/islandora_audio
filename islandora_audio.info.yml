@@ -1,5 +1,5 @@
 name: 'Islandora Audio'
-description: 'As Islandora module to handle audio files'
+description: 'Adds audio file ingest, display, and playback functionality.'
 dependencies:
   - :islandora
 package: 'Islandora Solution Packs'

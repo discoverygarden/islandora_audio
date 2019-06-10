@@ -13,11 +13,12 @@ function islandora_audio_requirements($phase) {
   $lame = \Drupal::config('islandora_audio.settings')->get('islandora_lame_url');
 
   $value = $t('Avaliable');
-  $description = t('Found');
+  $description = t('Found.');
   $severity = REQUIREMENT_OK;
   if (!is_executable($lame)) {
     $value = $t('Not Found');
-    $description = $t('Islandora is not configured to process audio. Click <a href="http://lame.sourceforge.net/download.php">here</a> for installation instructions.');
+    $description = $t('Islandora is not configured to process audio.') .
+      $t('See the <a href="http://lame.sourceforge.net/download.php">LAME site</a> for installation instructions.');
     $severity = REQUIREMENT_WARNING;
     if (\Drupal::config('islandora_audio.settings')->get('islandora_audio_defer_derivatives_on_ingest')) {
       $severity = REQUIREMENT_INFO;
