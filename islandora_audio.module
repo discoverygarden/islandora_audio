@@ -236,3 +236,37 @@ function islandora_audio_file_mimetype_mapping_alter(&$mapping) {
   unset($mapping['extensions']['mp3']);
   $mapping['extensions']['mp3'] = $code;
 }
+
+/**
+ * Implements hook_help().
+ */
+function islandora_audio_help($route) {
+  switch ($route) {
+    // Main help page for the module.
+    case 'help.page.islandora_audio':
+      // About section.
+      $output = '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('The Islandora Audio module is one of the many Islandora Solution Packs. This module allows for the creation of audio collections which can be populated by uploading WAV and MP3 files as objects within Islandora. An audio file can then be made available for download by users when viewing the corresponding object. See the <a href=":wiki">Audio Solution Pack wiki*</a> for more information.', [
+        ':wiki' => 'https://wiki.duraspace.org/display/ISLANDORA/Audio+Solution+Pack',
+      ]) .
+      '</p>';
+      // Uses section.
+      $output .= '<h3>' . t('Uses') . '</h3>';
+      $output .= '<dt>' . t('Upload Audio') . '</dt><dd>';
+      $output .= t('At www.yoursite.com/islandora/object/{ID}audio_collection/manage (ex: www.yoursite.com/islandora/object/islandora%3audio_collection/manage), you can click "Add an object to this Collection" and follow the ingest form to upload an audio file in the accepted formats.') .
+      '</dd>';
+      $output .= '<dt>' . t('View Audio Object') . '</dt><dd>' . t('At www.yoursite.com/islandora/object/{ID}, (ex: www.yoursite.com/islandora/object/islandora%3A10), you can play the audio, provided that an appropriate viewer has been configured at the <a href=":admin">Islandora Audio Configuration Page</a>.', [
+        ':admin' => Url::fromRoute('islandora_audio.admin')->toString(),
+      ]) .
+      '</dd>';
+      $output .= '<dt>' . t('Download Audio') . '</dt><dd>';
+      $output .= t('There are two ways to download audio from an Islandora Audio object:</br>1. You can go to www.yoursite.com/islandora/object/{object ID}/manage/datastreams, click "download" next to either the "PROXY_MP3" datastream or the "OBJ" datastream, and save the file to your computer as you would anytime you download a file.<br/>2. You can go to www.yoursite.com/islandora/object/{object ID}, click play on the viewer, right-click the viewer, and select "Save audio as". However, this does not work on all devices.') .
+      '</dd>';
+      $output .= '</br></br><p>';
+      $output .= t('*Links go to documentation for the Drupal 7 version of the module, as documentation for the Drupal 8 version of the module has not yet been written. There may be some small discrepencies; however, most key points remain useful.') .
+      '</p>';
+
+      return $output;
+
+  }
+}
